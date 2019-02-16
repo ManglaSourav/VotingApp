@@ -21,10 +21,26 @@ const userSchema = new mongoose.Schema({
   //   polls: [{ type: mongoose.Schema.Types.ObjectID, ref: "Poll" }]
 });
 
-userSchema.pre("save", async function(next) { //it takes effect before saving to database
+userSchema.pre("save", async function(next) {
+  //it takes effect before saving to database
   try {
+    // all async method need to put in try catch block
     if (!this.isModified("password")) {
+      return next();
     }
-  } catch {}
+    const hashed = await bcrypt.hash(this.password, 10);
+    this.password = hashed;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 });
+
+userSchema.methods.comparedPassword = async function(attempt, next) {
+  try {
+    return await bcrypt.compare(attempt, this.password);
+  } catch (err) {
+    next(err);
+  }
+};
 module.exports = mongoose.model("User", userSchema);
