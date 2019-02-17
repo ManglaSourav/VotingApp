@@ -25,4 +25,5 @@ const pollSchema = new mongooose.Schema({
   }
 });
 
+// pollSchema.index({ name: 1 }, { unique: true, background: false });
 module.exports = mongooose.model("Poll", pollSchema);

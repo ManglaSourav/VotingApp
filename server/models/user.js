@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function(next) {
-  //it takes effect before saving to database
+  //it takes effect before saving a document to database
   try {
     // all async method need to put in try catch block
     if (!this.isModified("password")) {
