@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 // const pollsSchema = new mongoose.Schema({
-
+ 
+//   type: mongoose.Schema.Types.ObjectID, ref: "Poll" 
 // })
 const userSchema = new mongoose.Schema({
   username: {
@@ -17,8 +18,8 @@ const userSchema = new mongoose.Schema({
   created: {
     type: Date,
     default: Date.now
-  }
-  //   polls: [{ type: mongoose.Schema.Types.ObjectID, ref: "Poll" }]
+  },
+    polls: [{ type: mongoose.Schema.Types.ObjectID, ref: "Poll" }]
 });
 
 userSchema.pre("save", async function(next) {
