@@ -15,10 +15,10 @@ const pollSchema = new mongooose.Schema({
   },
   question: String,
   options: [optionSchema],
-  voted: {
+  voted: [{
     type: mongooose.Schema.Types.ObjectId,
     ref: "User"
-  },
+  }],
   created: {
     type: Date,
     default: Date.now
