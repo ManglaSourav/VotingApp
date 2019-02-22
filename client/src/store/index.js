@@ -5,4 +5,11 @@ import rootReducer from "./reducers";
 const DEFAULT_STATE = {
   error: { message: null }
 };
-export const store = createStore(rootReducer, DEFAULT_STATE);
+export const store = createStore(
+  rootReducer,
+  DEFAULT_STATE,
+  compose(
+    applyMiddleware(thunk),
+    window._REDUX_DEVTOOLS_EXTENSION_ && window._REDUX_DEVTOOLS_EXTENSION_
+  )
+);
